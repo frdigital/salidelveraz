@@ -1,5 +1,6 @@
 import { CheckCircle, BookOpen, FileText, Users, Zap } from "lucide-react";
 import productoPrincipal from "@/assets/producto-principal.png";
+import { useScrollAnimation, getAnimationClass } from "@/hooks/useScrollAnimation";
 
 const features = [
   {
@@ -25,10 +26,17 @@ const features = [
 ];
 
 const SolutionSection = () => {
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { ref: imageRef, isVisible: imageVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: featuresRef, isVisible: featuresVisible } = useScrollAnimation({ threshold: 0.1 });
+
   return (
     <section className="py-20 bg-gradient-hero">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div 
+          ref={titleRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-16 ${getAnimationClass(titleVisible, "fade-up")}`}
+        >
           <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 px-4 py-2 rounded-full mb-6">
             <CheckCircle className="w-5 h-5 text-accent" />
             <span className="text-accent font-medium">LA SOLUCIÓN DEFINITIVA</span>
@@ -45,7 +53,10 @@ const SolutionSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Product showcase */}
-          <div className="flex justify-center">
+          <div 
+            ref={imageRef as React.RefObject<HTMLDivElement>}
+            className={`flex justify-center ${getAnimationClass(imageVisible, "fade-left")}`}
+          >
             <div className="relative">
               <div className="absolute inset-0 bg-accent/10 blur-3xl rounded-full" />
               <img
@@ -57,11 +68,15 @@ const SolutionSection = () => {
           </div>
 
           {/* Features */}
-          <div className="space-y-6">
+          <div 
+            ref={featuresRef as React.RefObject<HTMLDivElement>}
+            className="space-y-6"
+          >
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className="flex items-start gap-4 bg-gradient-card border border-border rounded-xl p-5 shadow-card"
+                style={{ transitionDelay: featuresVisible ? `${index * 150}ms` : '0ms' }}
+                className={`flex items-start gap-4 bg-gradient-card border border-border rounded-xl p-5 shadow-card transition-all duration-500 ${featuresVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
               >
                 <div className="flex-shrink-0 w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center">
                   <feature.icon className="w-6 h-6 text-accent" />
