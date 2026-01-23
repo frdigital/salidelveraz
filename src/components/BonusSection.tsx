@@ -3,6 +3,7 @@ import bonus1 from "@/assets/bonus-1.png";
 import bonus2 from "@/assets/bonus-2.png";
 import bonus3 from "@/assets/bonus-3.png";
 import bonus4 from "@/assets/bonus-4.png";
+import { useScrollAnimation, getAnimationClass } from "@/hooks/useScrollAnimation";
 
 const bonuses = [
   {
@@ -36,10 +37,16 @@ const bonuses = [
 ];
 
 const BonusSection = () => {
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.1 });
+
   return (
     <section className="py-20 bg-secondary">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div 
+          ref={titleRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-16 ${getAnimationClass(titleVisible, "fade-up")}`}
+        >
           <div className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-full mb-6 shadow-glow-gold">
             <Gift className="w-6 h-6" />
             <span className="font-bold text-lg uppercase">¡Bonus Exclusivos!</span>
@@ -53,11 +60,15 @@ const BonusSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {bonuses.map((bonus) => (
-            <div 
+        <div 
+          ref={cardsRef as React.RefObject<HTMLDivElement>}
+          className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+        >
+          {bonuses.map((bonus, index) => (
+            <div
               key={bonus.number}
-              className="group bg-gradient-card border border-border rounded-2xl overflow-hidden shadow-card hover:shadow-float hover:scale-[1.02] transition-all duration-300"
+              style={{ transitionDelay: cardsVisible ? `${index * 150}ms` : '0ms' }}
+              className={`group bg-gradient-card border border-border rounded-2xl overflow-hidden shadow-card hover:shadow-float hover:scale-[1.02] transition-all duration-500 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
               <div className="relative">
                 {/* Bonus number badge */}

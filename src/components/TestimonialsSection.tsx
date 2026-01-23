@@ -1,4 +1,5 @@
 import { Star, Quote } from "lucide-react";
+import { useScrollAnimation, getAnimationClass } from "@/hooks/useScrollAnimation";
 
 const testimonials = [
   {
@@ -22,10 +23,16 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.1 });
+
   return (
     <section className="py-20 bg-gradient-hero">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div 
+          ref={titleRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-16 ${getAnimationClass(titleVisible, "fade-up")}`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold font-heading text-foreground mb-4">
             Lo que dicen quienes ya <span className="text-accent">SALIERON DEL VERAZ</span>
           </h2>
@@ -34,11 +41,15 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div 
+          ref={cardsRef as React.RefObject<HTMLDivElement>}
+          className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+        >
           {testimonials.map((testimonial, index) => (
-            <div 
+            <div
               key={index}
-              className="bg-gradient-card border border-border rounded-2xl p-6 shadow-card relative"
+              style={{ transitionDelay: cardsVisible ? `${index * 150}ms` : '0ms' }}
+              className={`bg-gradient-card border border-border rounded-2xl p-6 shadow-card relative transition-all duration-500 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
               {/* Quote icon */}
               <div className="absolute -top-4 left-6">

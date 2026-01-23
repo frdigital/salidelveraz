@@ -5,6 +5,7 @@ import CountdownTimer from "./CountdownTimer";
 import { useCartStore } from "@/stores/cartStore";
 import { useShopifyProduct } from "@/hooks/useShopifyProduct";
 import { toast } from "sonner";
+import { useScrollAnimation, getAnimationClass } from "@/hooks/useScrollAnimation";
 
 const included = [
   "Guía completa 'Salí del Veraz' (PDF)",
@@ -16,6 +17,7 @@ const included = [
 ];
 
 const OfferSection = () => {
+  const { ref: offerRef, isVisible: offerVisible } = useScrollAnimation({ threshold: 0.1 });
   const { product, isLoading: productLoading } = useShopifyProduct();
   const { addItem, isLoading: cartLoading, getCheckoutUrl } = useCartStore();
 
@@ -54,7 +56,10 @@ const OfferSection = () => {
   return (
     <section id="oferta" className="py-20 bg-secondary">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
+        <div 
+          ref={offerRef as React.RefObject<HTMLDivElement>}
+          className={`max-w-4xl mx-auto ${getAnimationClass(offerVisible, "scale")}`}
+        >
           {/* Urgency banner with countdown */}
           <div className="bg-primary text-primary-foreground text-center py-4 px-6 rounded-t-2xl">
             <div className="flex flex-col items-center gap-3">

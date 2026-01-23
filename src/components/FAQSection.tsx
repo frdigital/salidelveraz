@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useScrollAnimation, getAnimationClass } from "@/hooks/useScrollAnimation";
 
 const faqs = [
   {
@@ -33,10 +34,16 @@ const faqs = [
 ];
 
 const FAQSection = () => {
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { ref: accordionRef, isVisible: accordionVisible } = useScrollAnimation({ threshold: 0.1 });
+
   return (
     <section className="py-20 bg-gradient-hero">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div 
+          ref={titleRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-12 ${getAnimationClass(titleVisible, "fade-up")}`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold font-heading text-foreground mb-4">
             Preguntas <span className="text-accent">Frecuentes</span>
           </h2>
@@ -45,7 +52,10 @@ const FAQSection = () => {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
+        <div 
+          ref={accordionRef as React.RefObject<HTMLDivElement>}
+          className={`max-w-3xl mx-auto ${getAnimationClass(accordionVisible, "scale")}`}
+        >
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem 

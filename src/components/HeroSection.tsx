@@ -1,8 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Check, ShieldCheck, ArrowDown } from "lucide-react";
 import productoPrincipal from "@/assets/producto-principal.png";
+import { useScrollAnimation, getAnimationClass } from "@/hooks/useScrollAnimation";
 
 const HeroSection = () => {
+  const { ref: badgeRef, isVisible: badgeVisible } = useScrollAnimation();
+  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: imageRef, isVisible: imageVisible } = useScrollAnimation({ threshold: 0.2 });
+
   const scrollToOffer = () => {
     document.getElementById("oferta")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -18,18 +23,24 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-4 pt-8 pb-16 lg:pt-16">
         {/* Top Badge */}
-        <div className="flex justify-center mb-8">
+        <section 
+          ref={badgeRef as React.RefObject<HTMLElement>}
+          className={`flex justify-center mb-8 ${getAnimationClass(badgeVisible, "scale")}`}
+        >
           <div className="inline-flex items-center gap-2 bg-secondary/50 backdrop-blur-sm border border-border px-6 py-3 rounded-full">
             <ShieldCheck className="w-5 h-5 text-accent" />
             <span className="text-sm font-medium text-foreground">
               +1,000 personas ya limpiaron su historial
             </span>
           </div>
-        </div>
+        </section>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className="text-center lg:text-left space-y-6">
+          <div 
+            ref={contentRef as React.RefObject<HTMLDivElement>}
+            className={`text-center lg:text-left space-y-6 ${getAnimationClass(contentVisible, "fade-left")}`}
+          >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold font-heading leading-tight">
               <span className="text-foreground">LIBERÁTE DEL</span>
               <br />
@@ -77,7 +88,10 @@ const HeroSection = () => {
           </div>
 
           {/* Right - Product Image */}
-          <div className="relative flex justify-center lg:justify-end">
+          <div 
+            ref={imageRef as React.RefObject<HTMLDivElement>}
+            className={`relative flex justify-center lg:justify-end ${getAnimationClass(imageVisible, "fade-right")}`}
+          >
             <div className="relative animate-float">
               {/* Glow effect */}
               <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-90" />
