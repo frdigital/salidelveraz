@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Check, Clock, ShieldCheck, Zap, Gift, Loader2 } from "lucide-react";
+import { Check, Clock, ShieldCheck, Zap, Gift, Loader2, AlertTriangle } from "lucide-react";
 import productoPrincipal from "@/assets/producto-principal.png";
+import CountdownTimer from "./CountdownTimer";
 import { useCartStore } from "@/stores/cartStore";
 import { useShopifyProduct } from "@/hooks/useShopifyProduct";
 import { toast } from "sonner";
@@ -54,11 +55,15 @@ const OfferSection = () => {
     <section id="oferta" className="py-20 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          {/* Urgency banner */}
-          <div className="bg-primary text-primary-foreground text-center py-3 px-6 rounded-t-2xl">
-            <div className="flex items-center justify-center gap-2">
-              <Clock className="w-5 h-5 animate-pulse" />
-              <span className="font-bold uppercase">¡Oferta por tiempo limitado!</span>
+          {/* Urgency banner with countdown */}
+          <div className="bg-primary text-primary-foreground text-center py-4 px-6 rounded-t-2xl">
+            <div className="flex flex-col items-center gap-3">
+              <div className="flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5 animate-shake" />
+                <span className="font-bold uppercase text-sm md:text-base">¡Oferta expira en!</span>
+                <AlertTriangle className="w-5 h-5 animate-shake" />
+              </div>
+              <CountdownTimer />
             </div>
           </div>
 
