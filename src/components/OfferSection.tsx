@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Check, Clock, ShieldCheck, Zap, Gift } from "lucide-react";
+import { Check, Clock, ShieldCheck, Zap, Gift, Loader2 } from "lucide-react";
 import productoPrincipal from "@/assets/producto-principal.png";
+import { useCartStore } from "@/stores/cartStore";
+import { useShopifyProduct } from "@/hooks/useShopifyProduct";
+import { toast } from "sonner";
 
 const included = [
   "Guía completa 'Salí del Veraz' (PDF)",
@@ -12,10 +15,40 @@ const included = [
 ];
 
 const OfferSection = () => {
-  const handleCheckout = () => {
-    // Aquí irá la integración con Shopify checkout
-    alert("Para completar la compra, primero debemos conectar tu tienda Shopify. Haz clic en 'Conectar Shopify' cuando esté disponible.");
+  const { product, isLoading: productLoading } = useShopifyProduct();
+  const { addItem, isLoading: cartLoading, getCheckoutUrl } = useCartStore();
+
+  const handleCheckout = async () => {
+    if (!product) {
+      toast.error("Producto no disponible");
+      return;
+    }
+
+    const variant = product.node.variants.edges[0]?.node;
+    if (!variant) {
+      toast.error("Variante no disponible");
+      return;
+    }
+
+    await addItem({
+      product,
+      variantId: variant.id,
+      variantTitle: variant.title,
+      price: variant.price,
+      quantity: 1,
+      selectedOptions: variant.selectedOptions || []
+    });
+
+    // Wait a brief moment for cart to update, then redirect
+    setTimeout(() => {
+      const checkoutUrl = getCheckoutUrl();
+      if (checkoutUrl) {
+        window.open(checkoutUrl, '_blank');
+      }
+    }, 500);
   };
+
+  const isLoading = productLoading || cartLoading;
 
   return (
     <section id="oferta" className="py-20 bg-secondary">
@@ -84,16 +117,21 @@ const OfferSection = () => {
                     variant="ctaLarge" 
                     className="w-full mb-4"
                     onClick={handleCheckout}
+                    disabled={isLoading}
                   >
-                    <Zap className="w-6 h-6 mr-2" />
-                    ¡QUIERO SALIR DEL VERAZ AHORA!
+                    {isLoading ? (
+                      <Loader2 className="w-6 h-6 mr-2 animate-spin" />
+                    ) : (
+                      <Zap className="w-6 h-6 mr-2" />
+                    )}
+                    {isLoading ? "Procesando..." : "¡QUIERO SALIR DEL VERAZ AHORA!"}
                   </Button>
 
                   {/* Trust badges */}
                   <div className="flex items-center justify-center lg:justify-start gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <ShieldCheck className="w-4 h-4 text-accent" />
-                      <span>Pago seguro</span>
+                      <span>Pago seguro con Shopify</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Gift className="w-4 h-4 text-accent" />
