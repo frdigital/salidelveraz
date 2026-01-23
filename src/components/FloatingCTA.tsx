@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Zap, X } from "lucide-react";
+import { Zap, X, Loader2 } from "lucide-react";
+import { useCartStore } from "@/stores/cartStore";
+import { useShopifyProduct } from "@/hooks/useShopifyProduct";
+import { toast } from "sonner";
 
 const FloatingCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
+  
+  const { product, isLoading: productLoading } = useShopifyProduct();
+  const { addItem, isLoading: cartLoading, getCheckoutUrl } = useCartStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,9 +25,36 @@ const FloatingCTA = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isDismissed]);
 
-  const scrollToOffer = () => {
-    document.getElementById("oferta")?.scrollIntoView({ behavior: "smooth" });
+  const handleCheckout = async () => {
+    if (!product) {
+      toast.error("Producto no disponible");
+      return;
+    }
+
+    const variant = product.node.variants.edges[0]?.node;
+    if (!variant) {
+      toast.error("Variante no disponible");
+      return;
+    }
+
+    await addItem({
+      product,
+      variantId: variant.id,
+      variantTitle: variant.title,
+      price: variant.price,
+      quantity: 1,
+      selectedOptions: variant.selectedOptions || []
+    });
+
+    setTimeout(() => {
+      const checkoutUrl = getCheckoutUrl();
+      if (checkoutUrl) {
+        window.open(checkoutUrl, '_blank');
+      }
+    }, 500);
   };
+
+  const isLoading = productLoading || cartLoading;
 
   if (!isVisible) return null;
 
@@ -38,10 +71,15 @@ const FloatingCTA = () => {
             variant="cta" 
             size="lg" 
             className="flex-1 sm:flex-none"
-            onClick={scrollToOffer}
+            onClick={handleCheckout}
+            disabled={isLoading}
           >
-            <Zap className="w-5 h-5 mr-2" />
-            ¡COMPRAR AHORA!
+            {isLoading ? (
+              <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+            ) : (
+              <Zap className="w-5 h-5 mr-2" />
+            )}
+            {isLoading ? "Procesando..." : "¡COMPRAR AHORA!"}
           </Button>
           
           <button 
