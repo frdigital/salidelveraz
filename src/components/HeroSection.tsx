@@ -1,15 +1,49 @@
 import { Button } from "@/components/ui/button";
-import { Check, ShieldCheck, ArrowDown } from "lucide-react";
+import { Check, ShieldCheck, ArrowDown, Clock, Zap } from "lucide-react";
 import productoPrincipal from "@/assets/producto-principal.png";
 import { useScrollAnimation, getAnimationClass } from "@/hooks/useScrollAnimation";
+import CountdownTimer from "./CountdownTimer";
+import { useShopifyProduct } from "@/hooks/useShopifyProduct";
+import { useCartStore } from "@/stores/cartStore";
 
 const HeroSection = () => {
   const { ref: badgeRef, isVisible: badgeVisible } = useScrollAnimation();
   const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation({ threshold: 0.2 });
   const { ref: imageRef, isVisible: imageVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: urgencyRef, isVisible: urgencyVisible } = useScrollAnimation({ threshold: 0.2 });
+  
+  const { product, isLoading } = useShopifyProduct();
+  const { addItem, getCheckoutUrl, items } = useCartStore();
 
   const scrollToOffer = () => {
     document.getElementById("oferta")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleCheckout = async () => {
+    if (!product) return;
+    
+    const variant = product.node.variants.edges[0]?.node;
+    if (!variant) return;
+
+    // If cart is empty, add the item first
+    if (items.length === 0) {
+      await addItem({
+        product,
+        variantId: variant.id,
+        variantTitle: variant.title,
+        price: variant.price,
+        quantity: 1,
+        selectedOptions: variant.selectedOptions || []
+      });
+    }
+
+    // Small delay to ensure cart is created
+    setTimeout(() => {
+      const checkoutUrl = getCheckoutUrl();
+      if (checkoutUrl) {
+        window.open(checkoutUrl, '_blank');
+      }
+    }, 500);
   };
 
   return (
@@ -71,17 +105,39 @@ const HeroSection = () => {
               ))}
             </ul>
 
-            <div className="pt-4">
-              <Button 
-                variant="cta" 
-                size="xl" 
-                onClick={scrollToOffer}
-                className="w-full sm:w-auto"
+            <div className="pt-4 space-y-4">
+              {/* Urgency Countdown Banner */}
+              <div 
+                ref={urgencyRef as React.RefObject<HTMLDivElement>}
+                className={`bg-gradient-to-r from-primary/90 to-primary text-primary-foreground p-4 rounded-xl shadow-glow-red ${getAnimationClass(urgencyVisible, "scale")}`}
               >
-                ¡QUIERO SALIR DEL VERAZ!
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <Clock className="w-5 h-5 animate-pulse" />
+                  <span className="font-bold text-sm uppercase tracking-wide">¡Oferta por tiempo limitado!</span>
+                </div>
+                <CountdownTimer />
+                <Button 
+                  variant="gold" 
+                  size="xl" 
+                  onClick={handleCheckout}
+                  disabled={isLoading || !product}
+                  className="w-full mt-4 animate-pulse hover:animate-none"
+                >
+                  <Zap className="w-5 h-5 mr-2" />
+                  ¡COMPRAR AHORA - 50% OFF!
+                </Button>
+              </div>
+
+              <Button 
+                variant="outline" 
+                size="lg" 
+                onClick={scrollToOffer}
+                className="w-full sm:w-auto border-muted-foreground/30"
+              >
+                Ver más detalles
                 <ArrowDown className="w-5 h-5 ml-2" />
               </Button>
-              <p className="mt-3 text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground">
                 Acceso inmediato • Descarga digital
               </p>
             </div>
