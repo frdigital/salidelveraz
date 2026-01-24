@@ -62,38 +62,39 @@ const BonusSection = () => {
 
         <div 
           ref={cardsRef as React.RefObject<HTMLDivElement>}
-          className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto"
         >
           {bonuses.map((bonus, index) => (
             <div
               key={bonus.number}
               style={{ transitionDelay: cardsVisible ? `${index * 150}ms` : '0ms' }}
-              className={`group bg-gradient-card border border-border rounded-2xl overflow-hidden shadow-card hover:shadow-float hover:scale-[1.02] transition-all duration-500 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`group bg-gradient-card border border-border rounded-xl md:rounded-2xl overflow-hidden shadow-card hover:shadow-float hover:scale-[1.02] transition-all duration-500 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
               <div className="relative">
                 {/* Bonus number badge */}
-                <div className="absolute top-4 left-4 z-10 bg-accent text-accent-foreground w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-glow-gold">
+                <div className="absolute top-2 left-2 md:top-4 md:left-4 z-10 bg-accent text-accent-foreground w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-sm md:text-lg shadow-glow-gold">
                   {bonus.number}
                 </div>
                 
                 <img
                   src={bonus.image}
                   alt={bonus.title}
-                  className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-40 sm:h-48 md:h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
                 />
               </div>
               
-              <div className="p-6">
-                <div className="text-accent text-sm font-semibold uppercase tracking-wide mb-1">
+              <div className="p-4 md:p-6">
+                <div className="text-accent text-xs md:text-sm font-semibold uppercase tracking-wide mb-1">
                   Bonus #{bonus.number}
                 </div>
-                <h3 className="text-xl font-bold font-heading text-foreground mb-1">
+                <h3 className="text-base md:text-xl font-bold font-heading text-foreground mb-1">
                   {bonus.title}
                 </h3>
-                <p className="text-accent/80 text-sm font-medium mb-3">
+                <p className="text-accent/80 text-xs md:text-sm font-medium mb-2 md:mb-3">
                   {bonus.subtitle}
                 </p>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground text-sm md:text-base">
                   {bonus.description}
                 </p>
               </div>

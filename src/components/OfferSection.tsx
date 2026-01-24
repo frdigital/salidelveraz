@@ -73,17 +73,18 @@ const OfferSection = () => {
           </div>
 
           <div className="bg-gradient-card border border-border border-t-0 rounded-b-2xl shadow-float overflow-hidden">
-            <div className="p-8 md:p-12">
-              <div className="grid lg:grid-cols-2 gap-8 items-center">
+            <div className="p-5 md:p-8 lg:p-12">
+              <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
                 {/* Product image */}
                 <div className="flex justify-center">
                   <div className="relative">
                     <img
                       src={productoPrincipal}
                       alt="Guía Salí del Veraz"
-                      className="w-full max-w-xs rounded-lg shadow-card"
+                      className="w-full max-w-[200px] md:max-w-xs rounded-lg shadow-card"
+                      loading="lazy"
                     />
-                    <div className="absolute -top-4 -right-4 bg-accent text-accent-foreground px-4 py-2 rounded-lg shadow-glow-gold rotate-12">
+                    <div className="absolute -top-2 -right-2 md:-top-4 md:-right-4 bg-accent text-accent-foreground px-3 py-1 md:px-4 md:py-2 rounded-lg shadow-glow-gold rotate-12 text-sm md:text-base">
                       <span className="font-bold">¡HOY!</span>
                     </div>
                   </div>

@@ -43,37 +43,37 @@ const TestimonialsSection = () => {
 
         <div 
           ref={cardsRef as React.RefObject<HTMLDivElement>}
-          className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto"
         >
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
               style={{ transitionDelay: cardsVisible ? `${index * 150}ms` : '0ms' }}
-              className={`bg-gradient-card border border-border rounded-2xl p-6 shadow-card relative transition-all duration-500 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`bg-gradient-card border border-border rounded-xl md:rounded-2xl p-5 md:p-6 shadow-card relative transition-all duration-500 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
               {/* Quote icon */}
-              <div className="absolute -top-4 left-6">
-                <div className="bg-accent w-8 h-8 rounded-full flex items-center justify-center shadow-glow-gold">
-                  <Quote className="w-4 h-4 text-accent-foreground" />
+              <div className="absolute -top-3 md:-top-4 left-4 md:left-6">
+                <div className="bg-accent w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shadow-glow-gold">
+                  <Quote className="w-3 h-3 md:w-4 md:h-4 text-accent-foreground" />
                 </div>
               </div>
 
               {/* Stars */}
-              <div className="flex gap-1 mb-4 mt-2">
+              <div className="flex gap-1 mb-3 md:mb-4 mt-2">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-accent text-accent" />
+                  <Star key={i} className="w-4 h-4 md:w-5 md:h-5 fill-accent text-accent" />
                 ))}
               </div>
 
               {/* Text */}
-              <p className="text-foreground mb-4 leading-relaxed">
+              <p className="text-foreground mb-3 md:mb-4 leading-relaxed text-sm md:text-base">
                 "{testimonial.text}"
               </p>
 
               {/* Author */}
-              <div className="border-t border-border pt-4">
-                <p className="font-bold text-foreground">{testimonial.name}</p>
-                <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+              <div className="border-t border-border pt-3 md:pt-4">
+                <p className="font-bold text-foreground text-sm md:text-base">{testimonial.name}</p>
+                <p className="text-xs md:text-sm text-muted-foreground">{testimonial.location}</p>
               </div>
             </div>
           ))}
