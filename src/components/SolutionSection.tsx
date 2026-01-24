@@ -51,18 +51,19 @@ const SolutionSection = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Product showcase */}
           <div 
             ref={imageRef as React.RefObject<HTMLDivElement>}
-            className={`flex justify-center ${getAnimationClass(imageVisible, "fade-left")}`}
+            className={`flex justify-center order-2 lg:order-1 ${getAnimationClass(imageVisible, "fade-left")}`}
           >
             <div className="relative">
               <div className="absolute inset-0 bg-accent/10 blur-3xl rounded-full" />
               <img
                 src={productoPrincipal}
                 alt="Guía Salí del Veraz"
-                className="relative z-10 w-full max-w-sm rounded-lg shadow-float"
+                className="relative z-10 w-full max-w-[280px] md:max-w-sm rounded-lg shadow-float"
+                loading="lazy"
               />
             </div>
           </div>
@@ -70,22 +71,22 @@ const SolutionSection = () => {
           {/* Features */}
           <div 
             ref={featuresRef as React.RefObject<HTMLDivElement>}
-            className="space-y-6"
+            className="space-y-4 md:space-y-6 order-1 lg:order-2"
           >
             {features.map((feature, index) => (
               <div 
                 key={index}
                 style={{ transitionDelay: featuresVisible ? `${index * 150}ms` : '0ms' }}
-                className={`flex items-start gap-4 bg-gradient-card border border-border rounded-xl p-5 shadow-card transition-all duration-500 ${featuresVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
+                className={`flex items-start gap-3 md:gap-4 bg-gradient-card border border-border rounded-xl p-4 md:p-5 shadow-card transition-all duration-500 ${featuresVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
               >
-                <div className="flex-shrink-0 w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center">
-                  <feature.icon className="w-6 h-6 text-accent" />
+                <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-accent/20 rounded-lg flex items-center justify-center">
+                  <feature.icon className="w-5 h-5 md:w-6 md:h-6 text-accent" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold font-heading text-foreground mb-1">
+                  <h3 className="text-base md:text-lg font-bold font-heading text-foreground mb-1">
                     {feature.title}
                   </h3>
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground text-sm md:text-base">
                     {feature.description}
                   </p>
                 </div>

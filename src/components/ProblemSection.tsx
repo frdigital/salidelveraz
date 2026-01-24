@@ -45,21 +45,21 @@ const ProblemSection = () => {
 
         <div 
           ref={cardsRef as React.RefObject<HTMLDivElement>}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6"
         >
           {problems.map((problem, index) => (
             <div
               key={index}
               style={{ transitionDelay: cardsVisible ? `${index * 100}ms` : '0ms' }}
-              className={`bg-gradient-card border border-border rounded-xl p-6 text-center shadow-card hover:scale-105 transition-all duration-500 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`bg-gradient-card border border-border rounded-xl p-4 md:p-6 text-center shadow-card hover:scale-105 transition-all duration-500 ${cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <problem.icon className="w-8 h-8 text-primary" />
+              <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                <problem.icon className="w-6 h-6 md:w-8 md:h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-bold font-heading text-foreground mb-2">
+              <h3 className="text-sm md:text-xl font-bold font-heading text-foreground mb-1 md:mb-2">
                 {problem.title}
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-xs md:text-base">
                 {problem.description}
               </p>
             </div>

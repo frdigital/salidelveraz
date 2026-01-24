@@ -55,32 +55,32 @@ const CountdownTimer = () => {
   const formatNumber = (num: number) => num.toString().padStart(2, '0');
 
   return (
-    <div className="flex items-center justify-center gap-2">
+    <div className="flex items-center justify-center gap-1 md:gap-2">
       <div className="flex flex-col items-center">
-        <div className="bg-background/20 backdrop-blur-sm px-3 py-2 rounded-lg min-w-[3.5rem]">
-          <span className="text-2xl md:text-3xl font-bold font-heading tabular-nums">
+        <div className="bg-background/20 backdrop-blur-sm px-2 py-1 md:px-3 md:py-2 rounded-lg min-w-[2.5rem] md:min-w-[3.5rem]">
+          <span className="text-xl md:text-2xl lg:text-3xl font-bold font-heading tabular-nums">
             {formatNumber(timeLeft.hours)}
           </span>
         </div>
-        <span className="text-xs mt-1 opacity-80">HORAS</span>
+        <span className="text-[10px] md:text-xs mt-1 opacity-80">HORAS</span>
       </div>
-      <span className="text-2xl md:text-3xl font-bold animate-pulse">:</span>
+      <span className="text-xl md:text-2xl lg:text-3xl font-bold animate-pulse">:</span>
       <div className="flex flex-col items-center">
-        <div className="bg-background/20 backdrop-blur-sm px-3 py-2 rounded-lg min-w-[3.5rem]">
-          <span className="text-2xl md:text-3xl font-bold font-heading tabular-nums">
+        <div className="bg-background/20 backdrop-blur-sm px-2 py-1 md:px-3 md:py-2 rounded-lg min-w-[2.5rem] md:min-w-[3.5rem]">
+          <span className="text-xl md:text-2xl lg:text-3xl font-bold font-heading tabular-nums">
             {formatNumber(timeLeft.minutes)}
           </span>
         </div>
-        <span className="text-xs mt-1 opacity-80">MIN</span>
+        <span className="text-[10px] md:text-xs mt-1 opacity-80">MIN</span>
       </div>
-      <span className="text-2xl md:text-3xl font-bold animate-pulse">:</span>
+      <span className="text-xl md:text-2xl lg:text-3xl font-bold animate-pulse">:</span>
       <div className="flex flex-col items-center">
-        <div className="bg-background/20 backdrop-blur-sm px-3 py-2 rounded-lg min-w-[3.5rem]">
-          <span className="text-2xl md:text-3xl font-bold font-heading tabular-nums">
+        <div className="bg-background/20 backdrop-blur-sm px-2 py-1 md:px-3 md:py-2 rounded-lg min-w-[2.5rem] md:min-w-[3.5rem]">
+          <span className="text-xl md:text-2xl lg:text-3xl font-bold font-heading tabular-nums">
             {formatNumber(timeLeft.seconds)}
           </span>
         </div>
-        <span className="text-xs mt-1 opacity-80">SEG</span>
+        <span className="text-[10px] md:text-xs mt-1 opacity-80">SEG</span>
       </div>
     </div>
   );
