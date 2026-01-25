@@ -7,6 +7,7 @@ import OfferSection from "@/components/OfferSection";
 import FAQSection from "@/components/FAQSection";
 import FooterSection from "@/components/FooterSection";
 import FloatingCTA from "@/components/FloatingCTA";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
       <FAQSection />
       <FooterSection />
       <FloatingCTA />
+      <FloatingWhatsApp />
     </main>
   );
 };
