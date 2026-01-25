@@ -1,7 +1,7 @@
 import { MessageCircle } from "lucide-react";
 
 const FloatingWhatsApp = () => {
-  const phoneNumber = "5491123456789"; // Número de WhatsApp (cambiar por el real)
+  const phoneNumber = "541173708427"; // Número de WhatsApp Argentina
   const message = "¡Hola! Tengo una consulta sobre la guía 'Salí del Veraz'";
   
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
