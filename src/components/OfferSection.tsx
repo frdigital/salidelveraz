@@ -139,10 +139,10 @@ const OfferSection = () => {
                   </Button>
 
                   {/* Email notice */}
-                  <div className="bg-accent/10 border border-accent/30 rounded-lg p-3 mb-4">
+                  <div className="bg-accent/10 border border-accent/30 rounded-lg p-3 mb-4 animate-pulse-glow">
                     <p className="text-sm text-foreground flex items-center justify-center gap-2">
-                      <span className="text-accent text-lg">📧</span>
-                      <span><strong className="text-base uppercase tracking-wide">IMPORTANTE:</strong> Al comprar, ingresá tu email para recibir el ebook al instante.</span>
+                      <span className="text-accent text-lg animate-bounce">📧</span>
+                      <span><strong className="text-base uppercase tracking-wide text-accent">IMPORTANTE:</strong> Al comprar, ingresá tu email para recibir el ebook al instante.</span>
                     </p>
                   </div>
 
