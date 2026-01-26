@@ -126,7 +126,7 @@ const OfferSection = () => {
                   {/* CTA Button */}
                   <Button 
                     variant="ctaLarge" 
-                    className="w-full mb-3"
+                    className="w-full mb-3 btn-cta-enhanced"
                     onClick={handleCheckout}
                     disabled={isLoading}
                   >

@@ -70,7 +70,7 @@ const FloatingCTA = () => {
           <Button 
             variant="cta" 
             size="lg" 
-            className="flex-1 sm:flex-none"
+            className="flex-1 sm:flex-none btn-cta-enhanced"
             onClick={handleCheckout}
             disabled={isLoading}
           >
