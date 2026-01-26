@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     question: "¿La comunidad de asesoría tiene costo adicional?",
-    answer: "No, el acceso a la comunidad de WhatsApp está incluido en tu compra. Es de por vida y ahí podés hacer consultas sobre tu caso particular y recibir orientación."
+    answer: "No, el acceso a la comunidad de WhatsApp con un abogado está incluido en tu compra. Tenés 1 mes desde la fecha de compra para hacer consultas sobre tu caso particular y recibir orientación profesional."
   }
 ];
 
