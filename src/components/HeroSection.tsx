@@ -121,7 +121,7 @@ const HeroSection = () => {
                   size="lg" 
                   onClick={handleCheckout}
                   disabled={isLoading || !product}
-                  className="w-full mt-3 md:mt-4 animate-pulse hover:animate-none text-sm md:text-base"
+                  className="w-full mt-3 md:mt-4 btn-gold-enhanced text-sm md:text-base"
                 >
                   <Zap className="w-4 h-4 md:w-5 md:h-5 mr-2" />
                   ¡COMPRAR AHORA - 50% OFF!
