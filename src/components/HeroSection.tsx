@@ -3,6 +3,7 @@ import { Check, ShieldCheck, ArrowDown, Clock, Zap } from "lucide-react";
 import productoPrincipal from "@/assets/producto-principal.png";
 import { useScrollAnimation, getAnimationClass } from "@/hooks/useScrollAnimation";
 import CountdownTimer from "./CountdownTimer";
+import LimitedSpotsCounter from "./LimitedSpotsCounter";
 import { useShopifyProduct } from "@/hooks/useShopifyProduct";
 import { useCartStore } from "@/stores/cartStore";
 
@@ -116,6 +117,9 @@ const HeroSection = () => {
                   <span className="font-bold text-xs md:text-sm uppercase tracking-wide">¡Oferta por tiempo limitado!</span>
                 </div>
                 <CountdownTimer />
+                <div className="mt-2">
+                  <LimitedSpotsCounter />
+                </div>
                 <Button 
                   variant="gold" 
                   size="lg" 

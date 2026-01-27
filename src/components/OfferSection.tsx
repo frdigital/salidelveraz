@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Check, Clock, ShieldCheck, Zap, Gift, Loader2, AlertTriangle } from "lucide-react";
 import productoPrincipal from "@/assets/producto-principal.png";
 import CountdownTimer from "./CountdownTimer";
+import LimitedSpotsCounter from "./LimitedSpotsCounter";
 import { useCartStore } from "@/stores/cartStore";
 import { useShopifyProduct } from "@/hooks/useShopifyProduct";
 import { toast } from "sonner";
@@ -121,6 +122,11 @@ const OfferSection = () => {
                       $17.999
                     </div>
                     <p className="text-muted-foreground mt-2">Pago único • Acceso inmediato</p>
+                    
+                    {/* Limited spots counter */}
+                    <div className="mt-4">
+                      <LimitedSpotsCounter />
+                    </div>
                   </div>
 
                   {/* CTA Button */}
