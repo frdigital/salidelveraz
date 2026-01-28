@@ -63,7 +63,7 @@ const FloatingCTA = () => {
       <div className="container mx-auto flex items-center justify-between gap-4">
         <div className="hidden sm:block">
           <p className="font-bold text-foreground">¡Oferta especial!</p>
-          <p className="text-sm text-muted-foreground">Guía + 4 Bonus por solo $17.999 <span className="text-accent">• 📧 Recibirás el ebook en tu email</span></p>
+          <p className="text-sm text-muted-foreground">Guía + 4 Bonus por solo $14.999 <span className="text-accent">• 📧 Recibirás el ebook en tu email</span></p>
         </div>
         
         <div className="flex items-center gap-3 flex-1 sm:flex-none">
