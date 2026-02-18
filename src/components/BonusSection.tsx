@@ -9,10 +9,10 @@ const BonusSection = () => {
   return (
     <section className="py-20 bg-secondary">
       <div className="container mx-auto px-4">
-        <div 
+        <div
           ref={titleRef as React.RefObject<HTMLDivElement>}
-          className={`text-center mb-12 ${getAnimationClass(titleVisible, "fade-up")}`}
-        >
+          className={`text-center mb-12 ${getAnimationClass(titleVisible, "fade-up")}`}>
+
           <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full mb-6 shadow-glow-gold animate-pulse">
             <Gift className="w-6 h-6" />
             <span className="font-bold text-lg uppercase">¡Super Bonus Exclusivo!</span>
@@ -26,10 +26,10 @@ const BonusSection = () => {
           </p>
         </div>
 
-        <div 
+        <div
           ref={cardRef as React.RefObject<HTMLDivElement>}
-          className={`max-w-4xl mx-auto ${getAnimationClass(cardVisible, "scale")}`}
-        >
+          className={`max-w-4xl mx-auto ${getAnimationClass(cardVisible, "scale")}`}>
+
           <div className="group bg-gradient-card border-4 border-accent rounded-3xl overflow-hidden shadow-float ring-4 ring-accent/30 hover:scale-[1.02] transition-all duration-500">
             {/* Super Bonus Header Badge */}
             <div className="bg-primary text-primary-foreground py-4 px-6 text-center">
@@ -45,8 +45,8 @@ const BonusSection = () => {
                   src={bonus4}
                   alt="Asesoría Legal por WhatsApp"
                   className="w-full h-64 md:h-full object-cover object-top"
-                  loading="lazy"
-                />
+                  loading="lazy" />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent md:hidden" />
               </div>
               
@@ -83,7 +83,7 @@ const BonusSection = () => {
                 <div className="mt-8 p-4 bg-accent/10 rounded-xl border border-accent/30">
                   <p className="text-center">
                     <span className="text-muted-foreground">Valor real:</span>
-                    <span className="line-through text-muted-foreground ml-2">$15.000</span>
+                    <span className="line-through text-muted-foreground ml-2">$80.000</span>
                     <span className="text-accent font-bold text-xl ml-2">¡GRATIS HOY!</span>
                   </p>
                 </div>
@@ -92,8 +92,8 @@ const BonusSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default BonusSection;
