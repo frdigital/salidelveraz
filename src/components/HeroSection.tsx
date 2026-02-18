@@ -77,7 +77,7 @@ const HeroSection = () => {
             className={`text-center lg:text-left space-y-4 md:space-y-6 ${getAnimationClass(contentVisible, "fade-left")}`}>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold font-heading leading-tight">
-              <span className="text-foreground">ENTENDÉ AL</span>
+              <span className="text-foreground">LIBERÁTE DEL</span>
               <br />
               <span className="text-primary text-4xl sm:text-5xl md:text-6xl lg:text-7xl">VERAZ</span>
               <br />
@@ -157,10 +157,10 @@ const HeroSection = () => {
               <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-90" />
               
               <img
-                src={productoPrincipal}
+
                 alt="Guía Salí del Veraz - Cadena Rota"
                 className="relative z-10 w-full max-w-[280px] md:max-w-md lg:max-w-lg drop-shadow-2xl rounded-lg"
-                loading="lazy" />
+                loading="lazy" src="/lovable-uploads/6eed7537-98e6-47f7-ba5b-2161d9a93562.png" />
 
 
               {/* Floating badge */}
