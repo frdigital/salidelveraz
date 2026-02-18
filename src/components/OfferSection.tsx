@@ -119,7 +119,7 @@ const OfferSection = () => {
                       </span>
                     </div>
                     <div className="text-5xl md:text-6xl font-extrabold font-heading text-foreground">
-                      $14.999
+                      $10.990
                     </div>
                     <p className="text-muted-foreground mt-2">Pago único • Acceso inmediato</p>
                     
